@@ -1,14 +1,14 @@
 
 package logic;
 
-import db.DBConnection;
+import db.DbConnection;
 
 public class Login {
     
-//    public boolean checkUserCredintials(String userName, String pass){
+//    Comment
+//    public boolean checkUserCredentials(String userName, String pass){
 //        
-//        DBConnection db = new DBConnection();
-//        
+//        DbConnection db = new DbConnection();
 //        
 //    }
     

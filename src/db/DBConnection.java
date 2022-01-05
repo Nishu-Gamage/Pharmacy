@@ -1,4 +1,3 @@
-
 package db;
 
 import java.sql.Connection;
@@ -6,25 +5,24 @@ import java.sql.DriverManager;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DBConnection {
-    
-    public static Connection getConnecion(){
-        
-        String url = "jdbc:mysql://localhost:3306/pharmacy" ;        
+public class DbConnection {
+
+    public static Connection getConnection() {
+
+        String url = "jdbc:mysql://localhost:3306/pharmacy";
         String userName = "root";
-        String password = "";
-        
+        String pass = "";
+
         Connection cn = null;
-        
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            cn = DriverManager.getConnection(url,userName, password);
-            
+            cn = DriverManager.getConnection(url, userName, pass);
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return cn;        
+        return cn;
     }
-    
-    
+
 }
