@@ -5,6 +5,9 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+import model.Drug;
+
 /**
  *
  * @author nishuddhika
@@ -31,9 +34,9 @@ public class DrugRegister extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        drID = new javax.swing.JTextField();
-        drID1 = new javax.swing.JTextField();
-        drName = new javax.swing.JTextField();
+        drugComment = new javax.swing.JTextField();
+        drugId = new javax.swing.JTextField();
+        drugName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,6 +55,11 @@ public class DrugRegister extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("MS UI Gothic", 0, 18)); // NOI18N
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,11 +78,11 @@ public class DrugRegister extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(drName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(drugName, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                                        .addComponent(drID, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(drugComment, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(9, 9, 9))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(124, 124, 124)
@@ -88,7 +96,7 @@ public class DrugRegister extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(163, Short.MAX_VALUE)
-                    .addComponent(drID1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(drugId, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(46, 46, 46)))
         );
         layout.setVerticalGroup(
@@ -104,10 +112,10 @@ public class DrugRegister extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(73, 73, 73))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(drName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(drugName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(drID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(drugComment, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -115,12 +123,36 @@ public class DrugRegister extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(95, 95, 95)
-                    .addComponent(drID1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(drugId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(262, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String dId = drugId.getText();
+        String dName = drugName.getName();
+        String dComment = drugComment.getText();
+
+        Drug d = new Drug();
+        d.setDrugId(Integer.parseInt(dId));
+        d.setDrugName(dName);
+        d.setComment(dComment);
+
+        logic.DrugRegister dr = new logic.DrugRegister();        
+        boolean result = dr.saveDrugInformation(d);
+        
+        if (result) {
+            JOptionPane.showMessageDialog(null, "success");
+        } else {
+            JOptionPane.showMessageDialog(null, "fale ");
+        }
+
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,9 +190,9 @@ public class DrugRegister extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField drID;
-    private javax.swing.JTextField drID1;
-    private javax.swing.JTextField drName;
+    private javax.swing.JTextField drugComment;
+    private javax.swing.JTextField drugId;
+    private javax.swing.JTextField drugName;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -5,6 +5,8 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nishuddhika
@@ -44,6 +46,11 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,6 +95,20 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+
+        logic.Login l = new logic.Login();
+        boolean result = l.checkUserCredentials(pUserID.getText(), pPass.getText());
+
+        if (result) {
+            new Dashboard().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Incorrect user name or password");
+        }
+
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
