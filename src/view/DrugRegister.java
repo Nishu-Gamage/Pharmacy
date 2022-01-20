@@ -133,7 +133,7 @@ public class DrugRegister extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
         String dId = drugId.getText();
-        String dName = drugName.getName();
+        String dName = drugName.getText();
         String dComment = drugComment.getText();
 
         Drug d = new Drug();
@@ -141,13 +141,13 @@ public class DrugRegister extends javax.swing.JFrame {
         d.setDrugName(dName);
         d.setComment(dComment);
 
-        logic.DrugRegister dr = new logic.DrugRegister();        
+        logic.DrugLogic dr = new logic.DrugLogic();        
         boolean result = dr.saveDrugInformation(d);
         
         if (result) {
             JOptionPane.showMessageDialog(null, "success");
         } else {
-            JOptionPane.showMessageDialog(null, "fale ");
+            JOptionPane.showMessageDialog(null, "fail ");
         }
 
         
