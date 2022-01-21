@@ -73,7 +73,7 @@ public class DrugLogic {
 
     public String getNumberOfItems(int id) {
         
-        String name = "";
+        String numberOfItem = "";
         
         try {
             DbConnection db = new DbConnection();
@@ -84,13 +84,13 @@ public class DrugLogic {
             ResultSet r = p.executeQuery();
 
             if (r.next()) {
-                name = r.getString("numberOfItems");
+                numberOfItem = r.getString("numberOfItems");
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(DrugLogic.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return name;
+        return numberOfItem;
     }
     
     
