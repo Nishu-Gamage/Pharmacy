@@ -61,7 +61,6 @@ public class DrugLogic {
             p.setInt(1, st.getsNoOfItem());
             p.setDouble(2, st.getsPrice());
             p.setInt(3, st.getsDrugId());
-
             p.execute();
             return true;
 
