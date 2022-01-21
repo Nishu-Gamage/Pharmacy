@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.event.KeyEvent;
+import static java.lang.Integer.parseInt;
 import javax.swing.JOptionPane;
 
 /**
@@ -108,6 +109,9 @@ public class StockUpdate extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -138,9 +142,6 @@ public class StockUpdate extends javax.swing.JFrame {
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(sid, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -200,7 +201,7 @@ public class StockUpdate extends javax.swing.JFrame {
 
             if (drugName != "") {
                 sName.setText(drugName);
-            }else{
+            } else {
                 sName.setText("Drug not found");
             }
         }
@@ -208,27 +209,35 @@ public class StockUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_sidKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          try{
-              
-       model.StockUpdate st = new model.StockUpdate();
-       st.setsDrugId(Integer.parseInt(sid.getText()));
-       st.setsCode(Integer.parseInt(sCode.getText()));
-       st.setsLotNo(Integer.parseInt(sLotNo.getText()));
-       st.setsDate(sDate.getDate());
-       st.setsNoOfItem(Integer.parseInt(sNoOfItem.getText()));
-       st.setsPrice(Double.parseDouble(sPrice.getText()));
-        
-       logic.DrugLogic d = new logic.DrugLogic();
-       boolean result = d.updateDrugInformation(st);
+        try {
 
-        if (result) {
-            JOptionPane.showMessageDialog(null, "success");
-        } else {
-            JOptionPane.showMessageDialog(null, "false ");
+            model.StockUpdate st = new model.StockUpdate();
+            st.setsDrugId(Integer.parseInt(sid.getText()));
+            st.setsCode(Integer.parseInt(sCode.getText()));
+            st.setsLotNo(Integer.parseInt(sLotNo.getText()));
+            st.setsDate(sDate.getDate());
+            st.setsPrice(Double.parseDouble(sPrice.getText()));
+
+            logic.DrugLogic d = new logic.DrugLogic();
+
+            String item = d.getNumberOfItems(Integer.parseInt(sid.getText()));
+            int updateItem = parseInt(sNoOfItem.getText());
+
+            int currentItem = parseInt(item);
+            int stockItem = updateItem + currentItem;
+
+            st.setsNoOfItem(stockItem);
+
+            boolean result = d.updateDrugInformation(st);
+
+            if (result) {
+                JOptionPane.showMessageDialog(null, "success");
+            } else {
+                JOptionPane.showMessageDialog(null, "false ");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-          }catch(Exception e){
-              e.printStackTrace();
-          }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed

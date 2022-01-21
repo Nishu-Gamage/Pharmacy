@@ -71,4 +71,30 @@ public class DrugLogic {
 
     }
 
+    public String getNumberOfItems(int id) {
+        
+        String name = "";
+        
+        try {
+            DbConnection db = new DbConnection();
+            String sql = "SELECT numberOfItems FROM `druginfo` WHERE drugId=?";
+
+            PreparedStatement p = db.getConnection().prepareStatement(sql);
+            p.setInt(1, id);
+            ResultSet r = p.executeQuery();
+
+            if (r.next()) {
+                name = r.getString("numberOfItems");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DrugLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return name;
+    }
+    
+    
+    
+    
+    
 }
