@@ -83,7 +83,8 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnDrugRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDrugRegisterActionPerformed
-        // TODO add your handling code here:
+        new DrugRegister().setVisible(true);
+            this.dispose();
     }//GEN-LAST:event_btnDrugRegisterActionPerformed
 
     /**
