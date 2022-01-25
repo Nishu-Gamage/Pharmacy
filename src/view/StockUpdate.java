@@ -220,14 +220,15 @@ public class StockUpdate extends javax.swing.JFrame {
 
             logic.DrugLogic d = new logic.DrugLogic();
 
-            String item = d.getNumberOfItems(Integer.parseInt(sid.getText()));
+            int item = d.getNumberOfItems(Integer.parseInt(sid.getText()));
             int updateItem = parseInt(sNoOfItem.getText());
 
-            int currentItem = parseInt(item);
+            int currentItem = item;
             int stockItem = updateItem + currentItem;
 
             st.setsNoOfItem(stockItem);
 
+            d.updateInformationTable(st);
             boolean result = d.updateDrugInformation(st);
 
             if (result) {

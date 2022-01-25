@@ -72,10 +72,10 @@ public class DrugLogic {
     }
 //    git commit test
 
-    public String getNumberOfItems(int id) {
-        
-        String numberOfItem = "";
-        
+    public int getNumberOfItems(int id) {
+
+        int numberOfItem = 0;
+
         try {
             DbConnection db = new DbConnection();
             String sql = "SELECT numberOfItems FROM `druginfo` WHERE drugId=?";
@@ -85,7 +85,7 @@ public class DrugLogic {
             ResultSet r = p.executeQuery();
 
             if (r.next()) {
-                numberOfItem = r.getString("numberOfItems");
+                numberOfItem = r.getInt("numberOfItems");
             }
 
         } catch (SQLException ex) {
@@ -93,9 +93,27 @@ public class DrugLogic {
         }
         return numberOfItem;
     }
-    
-    
-    
-    
-    
+
+    public boolean updateInformationTable(StockUpdate stockUpdate) {
+
+        try {
+            DbConnection db = new DbConnection();
+            String sql = "INSERT INTO `information`(`drugId`, `lotNumber`, `pricePerItem`, `date`) VALUES (?,?,?,?)";
+
+            PreparedStatement p = db.getConnection().prepareStatement(sql);
+            p.setInt(1, stockUpdate.getsDrugId());
+            p.setInt(2, stockUpdate.getsLotNo());
+            p.setDouble(3, stockUpdate.getsPrice());
+            java.sql.Date sqlDate= new java.sql.Date(stockUpdate.getsDate().getTime());
+            p.setDate(4, sqlDate);
+            p.execute();
+            
+            return true;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DrugLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
 }
