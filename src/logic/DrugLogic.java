@@ -61,7 +61,6 @@ public class DrugLogic {
             p.setInt(1, st.getsNoOfItem());
             p.setDouble(2, st.getsPrice());
             p.setInt(3, st.getsDrugId());
-
             p.execute();
             return true;
 
@@ -73,4 +72,30 @@ public class DrugLogic {
     }
 //    git commit test
 
+    public String getNumberOfItems(int id) {
+        
+        String numberOfItem = "";
+        
+        try {
+            DbConnection db = new DbConnection();
+            String sql = "SELECT numberOfItems FROM `druginfo` WHERE drugId=?";
+
+            PreparedStatement p = db.getConnection().prepareStatement(sql);
+            p.setInt(1, id);
+            ResultSet r = p.executeQuery();
+
+            if (r.next()) {
+                numberOfItem = r.getString("numberOfItems");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DrugLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numberOfItem;
+    }
+    
+    
+    
+    
+    
 }
