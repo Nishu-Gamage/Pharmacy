@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author nishuddhika
@@ -18,7 +21,7 @@ public class DrugIssue extends javax.swing.JFrame {
         initComponents();
 
         logic.DrugIssueLogic d = new logic.DrugIssueLogic();
-        lblOrderId.setText(d.getOrderID()+"");
+        lblOrderId.setText(d.getOrderID() + "");
 
     }
 
@@ -84,6 +87,28 @@ public class DrugIssue extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("MS UI Gothic", 0, 18)); // NOI18N
         jLabel10.setText("Balance");
+
+        drID2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drID2ActionPerformed(evt);
+            }
+        });
+        drID2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                drID2KeyPressed(evt);
+            }
+        });
+
+        drID4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drID4ActionPerformed(evt);
+            }
+        });
+        drID4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                drID4KeyPressed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,6 +229,63 @@ public class DrugIssue extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void drID2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drID2KeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            logic.DrugLogic drg = new logic.DrugLogic();
+            String drugName = drg.getDrugName(Integer.parseInt(drID2.getText()));
+
+            logic.DrugIssueLogic dru = new logic.DrugIssueLogic();
+            model.DrugIssue unitPrice = dru.getUnitPriceAndNumberOfItems(Integer.parseInt(drID2.getText()));
+            double upr = unitPrice.getPricePeritem();
+
+            if (drugName != "" && upr != 0) {
+                jLabel12.setText(drugName);
+                jLabel15.setText(upr + "");
+            } else {
+                jLabel12.setText("Drug not found");
+                jLabel15.setText("Unit Price not found");
+            }
+        }
+
+    }//GEN-LAST:event_drID2KeyPressed
+
+    private void drID4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drID4KeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            double numOfItem = Double.parseDouble(drID4.getText());
+
+            logic.DrugIssueLogic dru = new logic.DrugIssueLogic();
+            model.DrugIssue unitPrice = dru.getUnitPriceAndNumberOfItems(Integer.parseInt(drID2.getText()));
+
+            double up = unitPrice.getPricePeritem();
+
+            if (numOfItem <= up) {
+                double cal = numOfItem * up;
+                jLabel13.setText(cal + "");
+                model.DrugIssue drugIssue = new model.DrugIssue();
+                drugIssue.setDrugId(Integer.parseInt(drID2.getText()));
+                drugIssue.setNumberOfItem((int) numOfItem);
+                dru.updateNumberOfItems(drugIssue);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "there isnot enought items. you can get " + up);
+                jLabel13.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_drID4KeyPressed
+
+    private void drID4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drID4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_drID4ActionPerformed
+
+    private void drID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drID2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_drID2ActionPerformed
 
     /**
      * @param args the command line arguments
