@@ -10,6 +10,7 @@ public class StockUpdate {
     private int sNoOfItem;
     private double sPrice;
     private Date sDate;
+    private double cashIn;
 
     public int getsDrugId() {
         return sDrugId;
@@ -59,9 +60,19 @@ public class StockUpdate {
         this.sDate = sDate;
     }
 
+    public double getCashIn() {
+        return cashIn;
+    }
+
+    public void setCashIn(double cashIn) {
+        this.cashIn = cashIn;
+    }
+
     @Override
     public String toString() {
-        return "StockUpdate{" + "sDrugId=" + sDrugId + ", sCode=" + sCode + ", sLotNo=" + sLotNo + ", sNoOfItem=" + sNoOfItem + ", sPrice=" + sPrice + ", sDate=" + sDate + '}';
+        return "StockUpdate{" + "sDrugId=" + sDrugId + ", sCode=" + sCode + ", sLotNo=" + sLotNo + ", sNoOfItem=" + sNoOfItem + ", sPrice=" + sPrice + ", sDate=" + sDate + ", cashIn=" + cashIn + '}';
     }
+
+    
 
 }

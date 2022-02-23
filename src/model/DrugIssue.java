@@ -8,6 +8,7 @@ public class DrugIssue {
     private double pricePeritem;
     private int numberOfItem;
     private double total;
+    private double balance;
 
     public int getDrugId() {
         return drugId;
@@ -49,9 +50,18 @@ public class DrugIssue {
         this.total = total;
     }
 
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String toString() {
-        return "DrugIssue{" + "drugId=" + drugId + ", drugName=" + drugName + ", pricePeritem=" + pricePeritem + ", numberOfItem=" + numberOfItem + ", total=" + total + '}';
+        return "DrugIssue{" + "drugId=" + drugId + ", drugName=" + drugName + ", pricePeritem=" + pricePeritem + ", numberOfItem=" + numberOfItem + ", total=" + total + ", balance=" + balance + '}';
     }
+
     
 }
