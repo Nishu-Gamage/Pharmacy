@@ -256,23 +256,28 @@ public class DrugIssue extends javax.swing.JFrame {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
 
-            double numOfItem = Double.parseDouble(drID4.getText());
+            int numOfItem = Integer.parseInt(drID4.getText());
 
             logic.DrugIssueLogic dru = new logic.DrugIssueLogic();
             model.DrugIssue unitPrice = dru.getUnitPriceAndNumberOfItems(Integer.parseInt(drID2.getText()));
+            model.DrugIssue total = dru.getFullTotal();
 
-            double up = unitPrice.getPricePeritem();
+            double pi = unitPrice.getPricePeritem();
+            double ni = unitPrice.getNumberOfItem();    
+            double to = total.getTotal();
 
-            if (numOfItem <= up) {
-                double cal = numOfItem * up;
+            if (numOfItem <= pi) {
+                double cal = numOfItem * pi;
                 jLabel13.setText(cal + "");
                 model.DrugIssue drugIssue = new model.DrugIssue();
                 drugIssue.setDrugId(Integer.parseInt(drID2.getText()));
-                drugIssue.setNumberOfItem((int) numOfItem);
+                drugIssue.setNumberOfItem((int) (numOfItem +ni));
                 dru.updateNumberOfItems(drugIssue);
+                int insertValue = Integer.parseInt(drID4.getText());
+                jLabel14.setText((to+insertValue) + "");
 
             } else {
-                JOptionPane.showMessageDialog(null, "there isnot enought items. you can get " + up);
+                JOptionPane.showMessageDialog(null, "there isnot enought items. you can get " + pi);
                 jLabel13.setText("");
             }
         }

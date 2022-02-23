@@ -80,4 +80,27 @@ public class DrugIssueLogic {
         }
         return result;
     }
+    
+    public DrugIssue getFullTotal() {
+
+        int total = 0;
+        DrugIssue dr = new DrugIssue();
+
+        try {
+            DbConnection db = new DbConnection();
+            String sql = "SELECT SUM(numberOfItems) as total FROM `druginfo`";
+
+            PreparedStatement p = db.getConnection().prepareStatement(sql);
+            ResultSet r = p.executeQuery();
+
+            if (r.next()) {
+                total = r.getInt("total");
+                dr.setTotal(total);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DrugIssueLogic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dr;
+    }
 }
