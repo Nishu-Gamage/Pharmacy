@@ -99,6 +99,12 @@ public class DrugIssue extends javax.swing.JFrame {
             }
         });
 
+        drID3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                drID3KeyPressed(evt);
+            }
+        });
+
         drID4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drID4ActionPerformed(evt);
@@ -263,18 +269,18 @@ public class DrugIssue extends javax.swing.JFrame {
             model.DrugIssue total = dru.getFullTotal();
 
             double pi = unitPrice.getPricePeritem();
-            double ni = unitPrice.getNumberOfItem();    
+            double ni = unitPrice.getNumberOfItem();
             double to = total.getTotal();
 
-            if (numOfItem <= pi) {
+            if (numOfItem <= pi && ni > 0) {
                 double cal = numOfItem * pi;
                 jLabel13.setText(cal + "");
                 model.DrugIssue drugIssue = new model.DrugIssue();
                 drugIssue.setDrugId(Integer.parseInt(drID2.getText()));
-                drugIssue.setNumberOfItem((int) (numOfItem +ni));
+                drugIssue.setNumberOfItem((int) (ni - numOfItem));
                 dru.updateNumberOfItems(drugIssue);
                 int insertValue = Integer.parseInt(drID4.getText());
-                jLabel14.setText((to+insertValue) + "");
+                jLabel14.setText((to - insertValue) + "");
 
             } else {
                 JOptionPane.showMessageDialog(null, "there isnot enought items. you can get " + pi);
@@ -291,6 +297,29 @@ public class DrugIssue extends javax.swing.JFrame {
     private void drID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drID2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_drID2ActionPerformed
+
+    private void drID3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_drID3KeyPressed
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            int cashIn = Integer.parseInt(drID3.getText());
+
+            logic.DrugIssueLogic dl = new logic.DrugIssueLogic();
+            model.DrugIssue price = dl.getUnitPriceAndNumberOfItems(Integer.parseInt(drID2.getText()));
+
+            double pi = price.getPricePeritem();
+            double total = pi * Double.parseDouble(drID4.getText());
+
+            if (total <= cashIn) {
+                double balance = cashIn - total;
+                jLabel16.setText(balance + "");
+            } else {
+                JOptionPane.showMessageDialog(null, "testing " + pi);
+                jLabel16.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_drID3KeyPressed
 
     /**
      * @param args the command line arguments

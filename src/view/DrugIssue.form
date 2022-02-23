@@ -235,6 +235,9 @@
     <Component class="javax.swing.JLabel" name="jLabel13">
     </Component>
     <Component class="javax.swing.JTextField" name="drID3">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="drID3KeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
     </Component>
